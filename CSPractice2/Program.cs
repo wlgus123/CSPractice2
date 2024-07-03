@@ -7,7 +7,7 @@ namespace CSPractice2
         class Parent
         {
             public int variable = 273;
-            public void Method()
+            public virtual void Method()    // virtual을 붙여줌으로써 오버라이드가 가능해짐
             {
                 Console.WriteLine("부모 메서드");
             }
@@ -19,6 +19,14 @@ namespace CSPractice2
             public new  void Method()
             {
                 Console.WriteLine("자식 메서드");
+            }
+        }
+
+        class Child2 : Parent
+        {
+            public override void Method()   // C# 에서는 override를 접근제한자 뒤에 씀
+            {
+                Console.WriteLine("오버라이드 된 자식 메서드");
             }
         }
 
@@ -40,6 +48,14 @@ namespace CSPractice2
             Console.WriteLine(p.variable);  // 출력: 273
             p.Method();     // 출력: 부모 메서드
             ((Child)p).Method();    // 출력: 자식 메서드
+
+            // #6 23-8. 오버라이딩
+            Child2 child2 = new Child2();
+            child2.Method();    // 출력: 오버라이드 된 자식 메서드
+            ((Parent)child2).Method();  // 출력: 오버라이드 된 자식 메서드
+            Parent p2 = child2;
+            p2.Method();    // 출력: 오버라이드 된 자식 메서드
+            ((Child)p2).Method();    // 출력: 오버라이드 된 자식 메서드
         }
     }
 }
